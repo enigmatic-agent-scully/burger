@@ -1,21 +1,21 @@
 {
-  "name": "burger",
+  "name": "pizza",
   "version": "1.0.0",
-  "description": "eat-da-burger",
+  "description": "eat-da-pizza",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/enigmatic-agent-scully/burger.git"
+    "url": "git+https://github.com/enigmatic-agent-scully/pizza.git"
   },
   "author": "aj",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/enigmatic-agent-scully/burger/issues"
+    "url": "https://github.com/enigmatic-agent-scully/pizza/issues"
   },
-  "homepage": "https://github.com/enigmatic-agent-scully/burger#readme",
+  "homepage": "https://github.com/enigmatic-agent-scully/pizza#readme",
   "dependencies": {
     "body": "^5.1.0",
     "body-parser": "^1.18.3",
