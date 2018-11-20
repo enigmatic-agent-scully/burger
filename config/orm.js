@@ -9,20 +9,20 @@ const qMarks = (num) => {
   return arr.toString();
 };
 
-const objToSql = (ob) => {
-  for (var key in ob) {
-    var value = ob[key];
+// const objToSql = (ob) => {
+//   for (var key in ob) {
+//     var value = ob[key];
 
-    if (Object.hasOwnProperty.call(ob, key)) {
-      if (typeof value === 'string' && value.indexOf(' ') >= 0) {
-        value = `'${value}'`;
-      }
+//     if (Object.hasOwnProperty.call(ob, key)) {
+//       if (typeof value === 'string' && value.indexOf(' ') >= 0) {
+//         value = `'${value}'`;
+//       }
 
-      arr.push(`${key} = ${value}`);
-    }
-  }
-  return arr.toString();
-}
+//       arr.push(`${key} = ${value}`);
+//     }
+//   }
+//   return arr.toString();
+// };
 
 var orm = {
   all: (table, cb) => {
@@ -46,9 +46,8 @@ var orm = {
       cb(result);
     });
   },
-  update: (table, obColVals, condition, cb) => {
-    var oCV = objToSql(obColVals);
-    var qString = `UPDATE ${table} SET ${oCV} WHERE ${condition}`;
+  delete: (table, condition, cb) => {
+    var qString = `DELETE FROM ${table} WHERE ${condition}`;
 
     console.log(qString);
 

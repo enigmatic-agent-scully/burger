@@ -1,0 +1,17 @@
+<img src='../public/assets/images/boxes-clipart-pizza.png'>
+
+<h1>Eat-Da-Pizza</h1>
+
+<h2>Describe your ideal pizza!</h2>
+<form class='pizza-form'>
+  <div class='form-group'>
+    <textarea form='add-pizza' rows='2' cols='30'></textarea>
+  </div>
+  <button class='add-pizza' type='submit'>Add Pizza</button>
+</form>
+
+<ul>
+  {{#each pizzas}}
+  {{> pizzas/pizza-block }}
+  {{/each}}
+</ul>
