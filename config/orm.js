@@ -28,7 +28,9 @@ var orm = {
   all: (table, cb) => {
     var qString = `SELECT * FROM ${table};`;
     connection.query(qString, (err, result) => {
-      if (err) throw err;
+      if (err) {
+        throw err;
+      }
       cb(result);
     });
   },
@@ -36,14 +38,11 @@ var orm = {
     var qString = `INSERT INTO ${table}`;
     var colsS = cols.toString();
     var qS = qMarks(vals.length);
-
-    qString += ` (${colsS}) VALUES (${qS}) `
-
-    console.log(qString);
-
-    connection.query(qString, vals, (err, result) => {
-      if (err) throw err;
-      cb(result);
+    qString += ` (${colsS}) VALUES (${qS});`; return new Promise((resolve, reject) => {
+      connection.query(qString, vals, (err, result) => {
+        if (err) reject(err);
+        resolve(result);
+      })
     });
   },
   delete: (table, condition, cb) => {

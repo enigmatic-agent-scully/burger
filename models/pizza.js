@@ -7,12 +7,16 @@ var pizza = {
     });
   },
   create: (cols, vals, cb) => {
-    orm.create('pizzas', cols, vals, (res) => {
-      cb(res);
-    });
+    orm.insertData('pizzas', cols, vals).then((res) => {
+      var data = res;
+      cb(data);
+    })
+      .catch(err => {
+        throw err;
+      });
   },
   delete: (condition, cb) => {
-    orm.delete('cats', condition, (res) => {
+    orm.delete('pizzas', condition, (res) => {
       cb(res);
     });
   }

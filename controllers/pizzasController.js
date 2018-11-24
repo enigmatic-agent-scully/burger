@@ -13,17 +13,13 @@ router.get('/', (req, res) => {
 });
 
 router.post('/api/pizzas', (req, res) => {
-  pizza.create([
-    'name'
-  ], [
-      req.body.name
-    ], result => {
-      res.json({ id: result.insertId })
-    });
+  pizza.create(['pizza'], [req.body.pizza]).then(result => {
+    res.json(result);
+  });
 });
 
 router.delete('/api/pizzas/:id', (req, res) => {
-  var conditon = `id = ${req.params.id}`;
+  var condition = ` id = ${req.params.id}`;
 
   pizza.delete(condition, result => {
     if (result.affectedRows == 0) {
