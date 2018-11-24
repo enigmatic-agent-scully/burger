@@ -1,4 +1,5 @@
 var connection = require('../config/connection');
+var mysql = require('mysql');
 
 const qMarks = (num) => {
   var arr = [];
@@ -26,8 +27,8 @@ const qMarks = (num) => {
 
 var orm = {
   all: (table, cb) => {
-    var qString = `SELECT * FROM ${table};`;
-    connection.query(qString, (err, result) => {
+    var sql = `SELECT * FROM ${table};`;
+    connection.query(sql, (err, result) => {
       if (err) {
         throw err;
       }
@@ -35,22 +36,23 @@ var orm = {
     });
   },
   insertData: (table, cols, vals, cb) => {
-    var qString = `INSERT INTO ${table}`;
+    var sql = `INSERT INTO ${table}`;
     var colsS = cols.toString();
-    var qS = qMarks(vals.length);
-    qString += ` (${colsS}) VALUES (${qS});`; return new Promise((resolve, reject) => {
-      connection.query(qString, vals, (err, result) => {
-        if (err) reject(err);
-        resolve(result);
-      })
+    sql += ` (${colsS}) VALUES ('${vals}');`;
+    console.log(sql);
+
+    connection.query(sql, vals, (err, result) => {
+      if (err) throw (err);
+      cb(result);
     });
   },
-  delete: (table, condition, cb) => {
-    var qString = `DELETE FROM ${table} WHERE ${condition}`;
+  delete: (table, col, val, cb) => {
+    var sql = `DELETE FROM ?? WHERE ?? = ?`;
+    var values = [table, col, val];
+    sql = mysql.format(sql, values);
+    console.log(sql);
 
-    console.log(qString);
-
-    connection.query(qString, (err, result) => {
+    connection.query(sql, (err, result) => {
       if (err) throw err;
       cb(result);
     });

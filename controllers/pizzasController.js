@@ -12,16 +12,26 @@ router.get('/', (req, res) => {
   });
 });
 
-router.post('/api/pizzas', (req, res) => {
-  pizza.create(['pizza'], [req.body.pizza]).then(result => {
-    res.json(result);
+router.get('/api/pizzas', (req, res) => {
+  pizza.all(data => {
+    var hbsObj = {
+      pizzas: data
+    };
+    res.json(hbsObj);
   });
 });
 
-router.delete('/api/pizzas/:id', (req, res) => {
-  var condition = ` id = ${req.params.id}`;
+router.post('/api/pizzas', (req, res) => {
+  pizza.create('pizza', req.body.pizza, result => {
+    res.json(result);
+  })
+});
 
-  pizza.delete(condition, result => {
+router.delete('/api/pizzas/:id', (req, res) => {
+  var column = `id`;
+  var id = req.params.id;
+
+  pizza.delete(column, id, result => {
     if (result.affectedRows == 0) {
       return res.status(404).end();
     }

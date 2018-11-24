@@ -1,32 +1,37 @@
 $(() => {
   $('#add').on('click', e => {
-    var pizzaType = $('#pizzatext').val();
+    e.preventDefault();
+    var pizzaType = $('#pizzatext').val().trim();
     console.log(pizzaType);
-    // var newPizza = {
-    //   pizza: pizzaType
-    // };
-    // console.log(newPizza);
-    // $.post('/api/pizzas', newPizza, data => {
-    //   console.log(data);
-    // }, 'json')
-    //   .then(() => {
-    //     console.log('created new pizza');
-    //     location.reload();
-    //   });
+    var newPizza = {
+      pizza: pizzaType
+    };
+    console.log(newPizza);
+    $.ajax({
+      url: '/api/pizzas',
+      type: 'POST',
+      data: newPizza,
+      dataType: 'json',
+      success: () => {
+        console.log('created new pizza');
+        location.reload();
+      }
+    });
   });
 
-  $('#delete').on('click', e => {
+  $('.delete-pizza').click(e => {
     e.preventDefault();
-    var id = $(this).data('id');
+    var id = $('.delete-pizza').attr('id');
     console.log(id);
 
-    $.ajax(`/api/pizzas/${id}`,
+    $.ajax(
       {
-        type: 'DELETE'
-      }).then(() => {
-        console.log(`deleted pizza #${id}`);
-
-        location.reload();
-      })
+        url: `/api/pizzas/${id}`,
+        type: 'DELETE',
+        success: () => {
+          console.log(`deleted pizza #${id}`);
+          location.reload();
+        }
+      });
   })
 });
