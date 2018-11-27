@@ -1,29 +1,21 @@
 var connection = require('../config/connection');
 var mysql = require('mysql');
 
-const qMarks = (num) => {
-  var arr = [];
 
-  for (var i = 0; i < num; i++) {
-    arr.push('?');
+const objToSql = (ob) => {
+  for (var key in ob) {
+    var value = ob[key];
+
+    if (Object.hasOwnProperty.call(ob, key)) {
+      if (typeof value === 'string' && value.indexOf(' ') >= 0) {
+        value = `'${value}'`;
+      }
+
+      arr.push(`${key} = ${value}`);
+    }
   }
   return arr.toString();
 };
-
-// const objToSql = (ob) => {
-//   for (var key in ob) {
-//     var value = ob[key];
-
-//     if (Object.hasOwnProperty.call(ob, key)) {
-//       if (typeof value === 'string' && value.indexOf(' ') >= 0) {
-//         value = `'${value}'`;
-//       }
-
-//       arr.push(`${key} = ${value}`);
-//     }
-//   }
-//   return arr.toString();
-// };
 
 var orm = {
   all: (table, cb) => {
@@ -43,6 +35,15 @@ var orm = {
 
     connection.query(sql, vals, (err, result) => {
       if (err) throw (err);
+      cb(result);
+    });
+  },
+  update: (table, objColVals, condition, cb) => {
+    var sql = `UPDATE ${table} SET ${objToSql(objColVals)} WHERE ${condition}`;
+    console.log(sql);
+
+    connection.query(swl, (err, result) => {
+      if (err) throw err;
       cb(result);
     });
   },

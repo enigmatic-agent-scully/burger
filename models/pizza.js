@@ -12,6 +12,11 @@ var pizza = {
       cb(data);
     });
   },
+  update: (objColVals, condition, cb) => {
+    orm.update('pizzas', objColVals, condition, (res) => {
+      cb(res);
+    });
+  },
   delete: (col, val, cb) => {
     orm.delete('pizzas', col, val, (res) => {
       cb(res);

@@ -1,4 +1,10 @@
 $(() => {
+  $('.devour').on('click', (e) => {
+    var id = $('.devour').attr('id');
+    console.log(id);
+    var devour;
+  })
+
   $('#add').on('click', e => {
     e.preventDefault();
     var pizzaType = $('#pizzatext').val().trim();
