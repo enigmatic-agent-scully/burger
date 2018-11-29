@@ -12,8 +12,8 @@ var pizza = {
       cb(data);
     });
   },
-  update: (objColVals, condition, cb) => {
-    orm.update('pizzas', objColVals, condition, (res) => {
+  update: (col, val, condition, cb) => {
+    orm.update('pizzas', col, val, condition, (res) => {
       cb(res);
     });
   },

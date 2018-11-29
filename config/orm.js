@@ -3,6 +3,7 @@ var mysql = require('mysql');
 
 
 const objToSql = (ob) => {
+  let arr = [];
   for (var key in ob) {
     var value = ob[key];
 
@@ -38,11 +39,11 @@ var orm = {
       cb(result);
     });
   },
-  update: (table, objColVals, condition, cb) => {
-    var sql = `UPDATE ${table} SET ${objToSql(objColVals)} WHERE ${condition}`;
+  update: (table, col, val, condition, cb) => {
+    var sql = `UPDATE ${table} SET ${col} = ${val})} WHERE ${condition}`;
     console.log(sql);
 
-    connection.query(swl, (err, result) => {
+    connection.query(sql, (err, result) => {
       if (err) throw err;
       cb(result);
     });

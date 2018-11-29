@@ -8,8 +8,22 @@
   <button id='add' class='add-pizza' type='submit'>Add Pizza</button>
 </form>
 
+<h3>Pizzas to EAT</h3>
+
 <ul>
   {{#each pizzas}}
-  {{> pizzas/pizza-block }}
+  {{#unless devoured}}
+  {{> pizzas/pizza-block devoured=false}}
+  {{/unless}}
+  {{/each}}
+</ul>
+
+<h3>Pizzas that have been EATEN</h3>
+
+<ul>
+  {{#each pizzas}}
+  {{#if devoured}}
+  {{> pizzas/pizza-block devoured=false}}
+  {{/if}}
   {{/each}}
 </ul>

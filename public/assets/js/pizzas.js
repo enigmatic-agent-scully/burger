@@ -1,9 +1,24 @@
 $(() => {
   $('.devour').on('click', (e) => {
+    e.preventDefault();
     var id = $('.devour').attr('id');
     console.log(id);
-    var devour;
-  })
+    var devoured = $('.devour').data('devoured');
+
+    var isDevoured = {
+      devoured: devoured
+    };
+
+    $.ajax({
+      url: `/api/pizzas/${id}`,
+      type: 'PUT',
+      data: isDevoured,
+      success: () => {
+        console.log(`devoured pizza #${id}`);
+        location.reload();
+      }
+    });
+  });
 
   $('#add').on('click', e => {
     e.preventDefault();
@@ -27,7 +42,7 @@ $(() => {
 
   $('.delete-pizza').click(e => {
     e.preventDefault();
-    var id = $('.delete-pizza').attr('id');
+    var id = $('.delete-pizza').data('id');
     console.log(id);
 
     $.ajax(

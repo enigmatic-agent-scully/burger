@@ -1,6 +1,10 @@
 <li>
   {{pizza}}
-  <button class='delete-pizza' id='{{this.id}}'>
-    EAT DA PIZZA
+  <button class='devour' id='{{this.id}}' data-devoured='{{devoured}}'>
+    {{#if devoured}}MAKE DA PIZZA{{else}}EAT DA PIZZA
+    {{/if}}
+
   </button>
+
+  <button class="delete-pizza" data-id="{{this.id}}">DELETE!</button>
 </li>
