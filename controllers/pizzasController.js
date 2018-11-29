@@ -22,6 +22,7 @@ router.get('/api/pizzas', (req, res) => {
 });
 
 router.post('/api/pizzas', (req, res) => {
+  console.log(req);
   pizza.create('pizza', req.body.pizza, result => {
     res.json(result);
   })

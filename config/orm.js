@@ -40,7 +40,7 @@ var orm = {
     });
   },
   update: (table, col, val, condition, cb) => {
-    var sql = `UPDATE ${table} SET ${col} = ${val})} WHERE ${condition}`;
+    var sql = `UPDATE ${table} SET ${col} = ${val} WHERE ${condition}`;
     console.log(sql);
 
     connection.query(sql, (err, result) => {
