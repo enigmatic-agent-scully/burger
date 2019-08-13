@@ -4,4 +4,4 @@ Eat-Da-Pizza is a restaurant app that lets users input the names of pizzas they'
 
 This application is a pizza logger created using Node and MySQL to query and route data and Handlebars to generate the HTML. The app's architecture follows the MVC (Model View Controller) design pattern.
 
-
+hero
